@@ -1,12 +1,11 @@
-FROM node:18-alpine
+# Use official Nginx image
+FROM nginx:alpine
 
-WORKDIR /app
+# Copy your static files to nginx default directory
+COPY . /usr/share/nginx/html
 
-COPY package*.json ./
-RUN npm install -g http-server
+# Expose port 80
+EXPOSE 80
 
-COPY . .
+# Nginx starts automatically
 
-EXPOSE 8080
-
-CMD ["http-server", ".", "-p", "8080"]
