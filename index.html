@@ -5,18 +5,15 @@
 
   <meta charset="UTF-8">
   <title>Snake Game</title>
-  <style>
-    canvas {
-      display: block;
-      margin: 0 auto;
-      background-color: blue;
-      border: 2px solid black;
-    }
-  </style>
+  
 </head>
 <body>
   <h1>Snake Game</h1>
-  <div id="score">Score: 0</div>
+  <div style="display: flex; justify-content: center; width: 100%;">
+  <div id="scoreboard">
+    🍏 Score: <span id="score">0</span>
+  </div>
+</div>
   <canvas id="board"></canvas>
   
   <button id="restartBtn" onclick="document.getElementById('score').innerText = 'Score: 0'">Restart Game</button>

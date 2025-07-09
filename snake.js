@@ -6,6 +6,9 @@ let context;
 
 let snakeX = blockSize * 5;
 let snakeY = blockSize * 5;
+let appleImg = new Image();
+appleImg.src = "apple.png";
+
 
 let speedX = 0;  // speed of snake in x direction
 let speedY = 0;  // speed of snake in y direction
@@ -16,7 +19,7 @@ let foodX;
 let foodY;
 
 let gameOver = false;
-
+let score = 0;
 window.onload = function () {
     board = document.getElementById("board");
     board.height = total_row * blockSize;
@@ -25,7 +28,7 @@ window.onload = function () {
 
     placeFood();
     document.addEventListener("keyup", changeDirection);
-    setInterval(update, 200); // 100 ms = 10 FPS
+    setInterval(update, 300); // 100 ms = 10 FPS
 }
 
 function update() {
@@ -33,14 +36,20 @@ function update() {
         return;
     }
 
-    context.fillStyle = "green";
+    context.fillStyle = "#d2b48c";
     context.fillRect(0, 0, board.width, board.height);
 
-    context.fillStyle = "red";
-    context.fillRect(foodX, foodY, blockSize, blockSize);
+    // Draw food as an orange circle (or apple-like color)
+   context.drawImage(appleImg, foodX, foodY, blockSize, blockSize);
+
+
 
     if (snakeX === foodX && snakeY === foodY) {
         snakeBody.push([foodX, foodY]);
+        score++;  // Increment score
+    document.getElementById("score").innerText = score;
+     // Update score display
+    
         placeFood();
     }
 
@@ -54,11 +63,18 @@ function update() {
     snakeX += speedX * blockSize;
     snakeY += speedY * blockSize;
 
-    context.fillStyle = "white";
-    context.fillRect(snakeX, snakeY, blockSize, blockSize);
+    context.fillStyle = "#00FF00"; // light green for head
+    context.beginPath();
+    context.arc(snakeX + blockSize / 2, snakeY + blockSize / 2, blockSize / 2, 0, 2 * Math.PI);
+    context.fill();
+
+    context.fillStyle = "#00FF00"; // darker green for body
     for (let i = 0; i < snakeBody.length; i++) {
-        context.fillRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
-    }
+    context.beginPath();
+    context.arc(snakeBody[i][0] + blockSize / 2, snakeBody[i][1] + blockSize / 2, blockSize / 2, 0, 2 * Math.PI);
+    context.fill();
+}
+
 
     if (
         snakeX < 0 || snakeX >= total_col * blockSize ||
@@ -112,10 +128,3 @@ document.getElementById("restartBtn").addEventListener("click", () => {
     // Reset game over flag
     gameOver = false;
 });
-let score = 0;
-if (snakeX == foodX && snakeY == foodY) {
-    snakeBody.push([foodX, foodY]);
-    score++;  // Increment score
-    document.getElementById("score").innerText = "Score: " + score;  // Update score display
-    placeFood();
-}

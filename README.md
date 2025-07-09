@@ -30,6 +30,13 @@ Live Deployment
 You can view the live game at:
 http://51.20.114.191:8080/
 ****************************************************************
+What I PLearned in This Project
+
+- Created a GitHub Actions workflow for automated CI/CD
+- Built and pushed Docker images to Docker Hub
+- Deployed and ran Docker containers on AWS EC2
+- Worked with Nginx, Docker permissions, and secrets
+****************************************************************
  Maintained By:
 Shamaila Qayyum
 DevOps Learner & Educator | GitHub: @ShamailaQayyum
