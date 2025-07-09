@@ -28,7 +28,7 @@ jobs:
           context: .
           push: true
           no-cache: true
-          tags: shamailaq/firstsnakegame:v3.2
+          tags: shamailaq/firstsnakegame:vtest
           
       - name: SSH into EC2 and deploy
         uses: appleboy/ssh-action@master
@@ -37,7 +37,7 @@ jobs:
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            docker pull shamailaq/firstsnakegame:v3.2
+            docker pull shamailaq/firstsnakegame:vtest
             docker stop snakegame || true
             docker rm snakegame || true
-            docker run -d -p 80:80 --name snakegame shamailaq/firstsnakegame:v3.2
+            docker run -d -p 80:80 --name snakegame shamailaq/firstsnakegame:vtest
