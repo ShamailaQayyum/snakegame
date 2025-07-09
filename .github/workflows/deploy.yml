@@ -27,9 +27,9 @@ jobs:
         with:
           context: .
           push: true
-          tags: shamailaq/firstsnakegame:v3.1
           no-cache: true
-
+          tags: shamailaq/firstsnakegame:v3.1
+          
       - name: SSH into EC2 and deploy
         uses: appleboy/ssh-action@master
         with:
